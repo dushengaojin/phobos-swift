@@ -45,12 +45,12 @@ class PBSNetworkInterceptor: RequestInterceptor {
           let response = request.task?.response as? HTTPURLResponse,
           response.statusCode == 401,
           let host = request.request?.url?.host else {
-      completion(.doNotRetryWithError(error))
+      completion(.doNotRetry)
       return
     }
 
     guard let refreshTokenBlock = PBSRefreshTokenUtil.shared.refreshTokenBlocks[host] else {
-      completion(.doNotRetryWithError(error))
+      completion(.doNotRetry)
       return
     }
 
@@ -58,7 +58,7 @@ class PBSNetworkInterceptor: RequestInterceptor {
       if successed {
         completion(.retry)
       } else {
-        completion(.doNotRetryWithError(error))
+        completion(.doNotRetry)
       }
     }
   }
