@@ -70,6 +70,8 @@ public protocol PBSEndPoint {
   var encoding: ParameterEncoding { get }
   /// 默认为true   sessionType
   var sessionType: PBSSessionType { get }
+  /// 默认为30
+  var timeoutIntervalForRequest: Int { get }
 }
 
 extension PBSEndPoint {
@@ -90,6 +92,7 @@ extension PBSEndPoint {
   }
 
   public var sessionType: PBSSessionType { .insecure }
+  public var timeoutIntervalForRequest: Int { 30 }
 }
 
 public enum PBSSessionType {
